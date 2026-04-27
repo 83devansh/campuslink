@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusLink — Student Services Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    Campus<span>Link</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nav-home" onclick="showPage('home')">Home</button>
+    <button class="nav-link" id="nav-browse" onclick="handleBrowseClick()">Browse Services</button>
+    <button class="btn-post-nav" onclick="handlePostClick()">+ Post a Task</button>
+  
+  <button class="nav-link" onclick="handleAcceptedClick()">My Work</button>
+  <button class="nav-link" onclick="handleRequestsClick()">My Requests</button>
+  <button class="nav-login nav-link" onclick="showPage('login')">Login</button>
+  <button class="nav-register nav-link" onclick="showPage('register')">Register</button>
+  <button class="nav-logout nav-link" onclick="logoutUser()" style="display:none;">Logout</button>
+
+  </div>
+</nav>
+
+
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🎓 Built for students, by students</div>
+      <h1>Get Help. Give Help.<br><em>Earn on Campus.</em></h1>
+      <p>CampusLink connects students within your college for assignments, errands, printouts, transport, projects — anything you need done.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="handleBrowseClick()">🔍 Find Help Near Me</button>
+       <button class="btn-secondary" onclick="handlePostClick()">Post a Task</button>
+      </div>
+    
+    </div>
+  </section>
+
+ 
+  <div style="background: white; padding: 80px 2rem;">
+    <div class="section" style="padding: 0;">
+      <div class="section-label">Simple Process</div>
+      <div class="section-title">How CampusLink Works</div>
+      <div class="section-sub">Three steps to get your task done or start earning money on campus.</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon">📋</div>
+          <h3>Post Your Task</h3>
+          <p>Describe what you need — assignment help, parcel pickup, a printout, food delivery from canteen — and set your budget.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon">🔗</div>
+          <h3>Get Matched</h3>
+          <p>Students from your college who can help will see your task. CampusLink connects the two of you instantly.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon">✅</div>
+          <h3>Task Done & Pay</h3>
+          <p>Once the task is complete, pay securely through the platform. We take only a small commission. The rest goes to the helper.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-icon">⭐</div>
+          <h3>Rate & Review</h3>
+          <p>Build your reputation. High ratings help you earn more and get help faster next time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="categories-bg">
+    <div class="section" style="padding: 0; max-width: 1100px; margin: 0 auto;">
+      <div class="section-label">What You Can Find</div>
+      <div class="section-title">Every Kind of Campus Task</div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="filterAndBrowse('Study Help')">
+          <span class="cat-icon">📚</span>
+          <div class="cat-name">Study Help</div>
+          <div class="cat-count">Assignments, tutoring, notes</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Errands')">
+          <span class="cat-icon">🏃</span>
+          <div class="cat-name">Errands</div>
+          <div class="cat-count">Parcel pickup, queue standing</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Transport')">
+          <span class="cat-icon">🛵</span>
+          <div class="cat-name">Transport</div>
+          <div class="cat-count">Rides, luggage, delivery</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Printouts')">
+          <span class="cat-icon">🖨️</span>
+          <div class="cat-name">Printouts</div>
+          <div class="cat-count">Print, bind, laminate</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Food')">
+          <span class="cat-icon">🍱</span>
+          <div class="cat-name">Food Delivery</div>
+          <div class="cat-count">Canteen, mess, tuck shop</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Tech Help')">
+          <span class="cat-icon">💻</span>
+          <div class="cat-name">Tech Help</div>
+          <div class="cat-count">Code debug, install, setup</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Creative')">
+          <span class="cat-icon">🎨</span>
+          <div class="cat-name">Creative</div>
+          <div class="cat-count">Design, edit, photography</div>
+        </div>
+        <div class="cat-card" onclick="filterAndBrowse('Projects')">
+          <span class="cat-icon">🔬</span>
+          <div class="cat-name">Projects</div>
+          <div class="cat-count">Lab work, reports, models</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <footer>
+    <div class="logo">Campus<span>Link</span></div>
+    <p>Connecting students across India's top campuses</p>
+    <p style="margin-top: 12px; font-size: 12px;">© 2025 CampusLink · Terms · Privacy · Support</p>
+  </footer>
+</div>
+
+
+<div class="page" id="page-browse">
+  <div class="browse-header">
+    <div class="browse-header-inner">
+      <h1>Browse Tasks & Services</h1>
+      <p id="browse-college-label">Showing tasks...</p>
+     
+      <div class="search-bar">
+        <span style="font-size: 15px; color: var(--gray);">🔍</span>
+        <input type="text" id="search-input" placeholder="Search assignments, rides, printouts..." oninput="filterServices()">
+      </div>
+      <div class="filters-row" id="filter-chips">
+        <button class="filter-chip active" onclick="setFilter('All', this)">All</button>
+        <button class="filter-chip" onclick="setFilter('Study Help', this)">📚 Study Help</button>
+        <button class="filter-chip" onclick="setFilter('Errands', this)">🏃 Errands</button>
+        <button class="filter-chip" onclick="setFilter('Transport', this)">🛵 Transport</button>
+        <button class="filter-chip" onclick="setFilter('Printouts', this)">🖨️ Printouts</button>
+        <button class="filter-chip" onclick="setFilter('Food', this)">🍱 Food</button>
+        <button class="filter-chip" onclick="setFilter('Tech Help', this)">💻 Tech</button>
+        <button class="filter-chip" onclick="setFilter('Creative', this)">🎨 Creative</button>
+        <button class="filter-chip" onclick="setFilter('Projects', this)">🔬 Projects</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="browse-layout">
+    <div class="sidebar">
+      <h3>Category</h3>
+      <div class="sidebar-cats" id="sidebar-cats">
+        <div class="sidebar-cat active" onclick="setFilter('All', this, true)">All Categories <span class="cnt" id="cnt-all">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Study Help', this, true)">📚 Study Help <span class="cnt" id="cnt-study">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Errands', this, true)">🏃 Errands <span class="cnt" id="cnt-errands">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Transport', this, true)">🛵 Transport <span class="cnt" id="cnt-transport">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Printouts', this, true)">🖨️ Printouts <span class="cnt" id="cnt-printouts">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Food', this, true)">🍱 Food <span class="cnt" id="cnt-food">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Tech Help', this, true)">💻 Tech Help <span class="cnt" id="cnt-tech">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Creative', this, true)">🎨 Creative <span class="cnt" id="cnt-creative">0</span></div>
+        <div class="sidebar-cat" onclick="setFilter('Projects', this, true)">🔬 Projects <span class="cnt" id="cnt-projects">0</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="results-count" id="results-count"></div>
+      <div class="services-grid" id="services-grid">
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" id="page-post">
+  <div class="post-page">
+
+    <div class="post-header">
+      <h1>Post a Task</h1>
+      <p>Tell others what you need — clear details get faster responses</p>
+    </div>
+
+    <div class="form-card">
+
+      
+      <div class="form-section">
+        <div class="form-section-title">About You</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name <span class="req">*</span></label>
+            <input class="form-control" id="f-name" type="text" placeholder="e.g. Devansh Sharma">
+          </div>
+
+          <div class="form-group">
+            <label>College Email <span class="req">*</span></label>
+            <input class="form-control" id="f-email" type="email" placeholder="e.g. devansh@shooliniuniversity.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp / Phone <span class="req">*</span></label>
+            <input class="form-control" id="f-phone" type="tel" placeholder="e.g. 9876543210">
+          </div>
+
+          <div class="form-group">
+            <label>Year & Department</label>
+            <input class="form-control" id="f-year" type="text" placeholder="e.g. 2nd Year, CSE">
+          </div>
+        </div>
+
+        <p style="font-size:12px; color:var(--gray); margin-top:6px;">
+          This helps others trust your request
+        </p>
+      </div>
+
+     
+      <div class="form-section">
+        <div class="form-section-title">Task Details</div>
+
+        <div class="form-group">
+          <label>Task Title <span class="req">*</span></label>
+          <input class="form-control" id="f-title" type="text" placeholder="e.g. Need someone to collect my parcel">
+        </div>
+
+        <div class="form-group">
+          <label>Category <span class="req">*</span></label>
+        <select class="form-control" id="f-category">
+  <option value="">Select category</option>
+  <option value="Study Help">📚 Study Help</option>
+  <option value="Errands">🏃 Errands</option>
+  <option value="Transport">🛵 Transport</option>
+  <option value="Food">🍱 Food</option>
+  <option value="Printouts">🖨️ Printouts</option>
+  <option value="Tech Help">💻 Tech Help</option>
+  <option value="Creative">🎨 Creative</option>
+  <option value="Projects">🔬 Projects</option>
+  <option value="Other">OTHER</option>
+</select>
+        </div>
+
+        <div class="form-group">
+          <label>Description <span class="req">*</span></label>
+          <textarea class="form-control" id="f-desc"></textarea>
+        </div>
+      </div>
+
+     
+      <div class="form-section">
+        <div class="form-section-title">Payment</div>
+
+       <div class="form-group">
+  <label>Budget (₹)</label>
+  <input 
+    class="form-control" 
+    id="f-budget" 
+    type="number" 
+    placeholder="e.g. 100"
+  >
+</div>
+</div>
+
+      <button class="btn-submit" onclick="postTask()">🚀 Post My Task</button>
+
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-detail">
+  <div class="detail-page" id="detail-inner">
+ 
+  </div>
+</div>
+
+<div class="page" id="page-login">
+  <div class="auth-card">
+    <h2>Welcome back 👋</h2>
+    <p class="auth-sub">Login to continue using CampusLink</p>
+
+    <input class="form-control" id="login-email" placeholder="College email">
+    <input class="form-control" id="login-password" type="password" placeholder="Password">
+
+    <button class="btn-submit" onclick="loginUser()">Login</button>
+
+    <p class="auth-switch">
+      New here? <span onclick="showPage('register')">Create account</span>
+    </p>
+  </div>
+</div>
+
+
+<div class="page" id="page-register">
+  <div class="auth-card">
+    <h2>Create your account 🚀</h2>
+    <p class="auth-sub">Join your campus network</p>
+
+    <input class="form-control" id="reg-name" placeholder="Full name">
+    <input class="form-control" id="reg-email" placeholder="College email">
+    <input class="form-control" id="reg-password" type="password" placeholder="Create password">
+    <input class="form-control" id="reg-university" placeholder="University / College name">
+   <input class="form-control" id="reg-roll" placeholder="Registration number">
+    <input class="form-control" id="reg-dept" placeholder="Department (CSE, BBA...)">
+    <input class="form-control" id="reg-phone" placeholder="Mobile number">
+
+    <button class="btn-submit" onclick="registerUser()">Register</button>
+
+    <p class="auth-switch">
+      Already have an account? <span onclick="showPage('login')">Login</span>
+    </p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-icon">🤝</div>
+    <h2>Connect with Helper</h2>
+    <p><p>CampusLink connects you instantly. Complete the task and earn directly.</p></p>
+    <div class="contact-info" id="modal-info"></div>
+   <button class="modal-btn" onclick="closeModal()">
+    Maybe Later
+</button>
+  </div>
+</div>
+
+<div class="page" id="page-requests">
+  <div class="requests-page">
+
+    <div class="requests-header">
+      <h1>My Requests</h1>
+      <p>Track your posted tasks and their status</p>
+    </div>
+
+    <div class="requests-list" id="requests-list">
+    
+    </div>
+
+  </div>
+</div>
+
+<div class="page" id="page-accepted">
+  <div class="requests-page">
+
+    <div class="requests-header">
+      <h1>My Work</h1>
+      <p>Tasks you’ve accepted</p>
+    </div>
+
+    <div class="requests-list" id="accepted-list">
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="chatbot-bubble" onclick="toggleChatbot()" title="Ask CampusLink AI">
+  <span id="chatbot-bubble-icon">🤖</span>
+  <span id="chatbot-unread" class="chatbot-unread" style="display:none;">1</span>
+</div>
+
+<div id="chatbot-panel" class="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-header-left">
+      <div class="chatbot-avatar">🤖</div>
+      <div>
+        <div class="chatbot-title">CampusLink AI</div>
+        <div class="chatbot-status">
+          <span class="chatbot-dot"></span> Online · Powered by Groq
+        </div>
+      </div>
+    </div>
+    <div class="chatbot-header-actions">
+      <button class="chatbot-clear-btn" onclick="clearChatHistory()" title="Clear chat">🗑️</button>
+      <button class="chatbot-close-btn" onclick="toggleChatbot()">✕</button>
+    </div>
+  </div>
+
+  <div class="chatbot-messages" id="chatbot-messages">
+    <div class="chatbot-msg bot">
+      <div class="chatbot-msg-bubble">
+        👋 Hi! I'm your <strong>CampusLink AI assistant</strong>. I can help you with:<br><br>
+        • Finding the right task category<br>
+        • Tips for posting or accepting tasks<br>
+        • Campus life advice<br>
+        • Any questions about CampusLink!
+      </div>
+    </div>
+  </div>
+
+  <div class="chatbot-suggestions" id="chatbot-suggestions">
+    <button onclick="sendSuggestion('How do I post a task?')">How do I post a task?</button>
+    <button onclick="sendSuggestion('How can I earn money?')">How can I earn money?</button>
+    <button onclick="sendSuggestion('What categories are available?')">What categories?</button>
+  </div>
+
+  <div class="chatbot-input-row">
+    <input
+      type="text"
+      id="chatbot-input"
+      class="chatbot-input"
+      placeholder="Ask anything about CampusLink..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    >
+    <button class="chatbot-send-btn" onclick="sendChatMessage()" id="chatbot-send-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </button>
+  </div>
+</div>
+
+
+<div id="toast" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #111;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: none;
+  z-index: 999999;
+  font-size: 14px;
+"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  query,
+  where,
+  deleteDoc,
+  doc,
+  runTransaction,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBUCT_c5ZhV0gl-fzya9G6utzA5TK4OBL0",
+  authDomain: "campuslink-e4273.firebaseapp.com",
+  projectId: "campuslink-e4273",
+  storageBucket: "campuslink-e4273.firebasestorage.app",
+  messagingSenderId: "911213656960",
+  appId: "1:911213656960:web:db361aa1e0b249f57e5f65"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+window.db = db;
+const firebaseFns = {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc, 
+  query,
+  where,
+  deleteDoc,
+  doc,
+  updateDoc,
+  runTransaction
+};
+window.firebaseFns = firebaseFns;
+</script>
+<script src="java.js"></script>
+
+<script src="gemini_chatbot.js"></script>
+</body>
+</html>
